@@ -85,6 +85,11 @@ const Login = () => {
         return;
       }
     }
+    const phoneRegex = /^\d{8}$/;
+    if (!phoneRegex.test(regTelefono)) {
+      setError('El teléfono debe tener exactamente 8 números.');
+      return;
+    }
     setIsLoading(true);
     setError('');
     setRegSuccess('');
@@ -264,6 +269,7 @@ const Login = () => {
                     onChange={(e) => setRegEmail(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-background/50 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all placeholder-gray-600 text-sm"
                     placeholder="ejemplo@correo.com"
+                    maxLength={100}
                     required
                   />
                 </div>
@@ -283,6 +289,7 @@ const Login = () => {
                     onChange={(e) => setRegNombre(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-background/50 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all placeholder-gray-600 text-sm"
                     placeholder="Tu nombre"
+                    maxLength={50}
                     required
                   />
                 </div>
@@ -300,6 +307,7 @@ const Login = () => {
                     onChange={(e) => setRegApellido(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-background/50 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all placeholder-gray-600 text-sm"
                     placeholder="Tu apellido"
+                    maxLength={50}
                     required
                   />
                 </div>
@@ -332,9 +340,10 @@ const Login = () => {
                   <input
                     type="tel"
                     value={regTelefono}
-                    onChange={(e) => setRegTelefono(e.target.value)}
+                    onChange={(e) => setRegTelefono(e.target.value.replace(/\D/g, ''))}
                     className="w-full pl-9 pr-3 py-2 bg-background/50 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all placeholder-gray-600 text-sm"
-                    placeholder="Número de teléfono"
+                    placeholder="Número de 8 dígitos"
+                    maxLength={8}
                     required
                   />
                 </div>

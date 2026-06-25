@@ -84,6 +84,11 @@ export const UsuariosTable = () => {
         return;
       }
     }
+    const phoneRegex = /^\d{8}$/;
+    if (!phoneRegex.test(formTelefono)) {
+      alert('El teléfono debe tener exactamente 8 números.');
+      return;
+    }
     const payload = {
       id: editingId || null,
       nombre_usuario: formNombreUsuario,
@@ -251,6 +256,7 @@ export const UsuariosTable = () => {
                 value={formNombreUsuario}
                 onChange={(e) => setFormNombreUsuario(e.target.value)}
                 placeholder="ej. player_one"
+                maxLength={20}
                 className="w-full bg-background/80 border border-white/5 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-primary"
               />
             </div>
@@ -262,6 +268,7 @@ export const UsuariosTable = () => {
                 value={formEmail}
                 onChange={(e) => setFormEmail(e.target.value)}
                 placeholder="ej. correo@dominio.com"
+                maxLength={20}
                 className="w-full bg-background/80 border border-white/5 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none"
               />
             </div>
@@ -278,6 +285,7 @@ export const UsuariosTable = () => {
                 value={formNombre}
                 onChange={(e) => setFormNombre(e.target.value)}
                 placeholder="Nombre físico"
+                maxLength={10}
                 className="w-full bg-background/80 border border-white/5 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none"
               />
             </div>
@@ -288,6 +296,7 @@ export const UsuariosTable = () => {
                 value={formApellido}
                 onChange={(e) => setFormApellido(e.target.value)}
                 placeholder="Apellido físico"
+                maxLength={10}
                 className="w-full bg-background/80 border border-white/5 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none"
               />
             </div>
@@ -336,8 +345,9 @@ export const UsuariosTable = () => {
                 type="text"
                 required
                 value={formTelefono}
-                onChange={(e) => setFormTelefono(e.target.value)}
-                placeholder="+591XXXXXXXX"
+                onChange={(e) => setFormTelefono(e.target.value.replace(/\D/g, ''))}
+                placeholder="8 números"
+                maxLength={8}
                 className="w-full bg-background/80 border border-white/5 border border-white/10 rounded px-2.5 py-1.5 text-xs text-white focus:outline-none"
               />
             </div>
