@@ -77,6 +77,13 @@ export const UsuariosTable = () => {
   };
   const handleSave = async (e) => {
     e.preventDefault();
+    if (formFechaNacimiento) {
+      const year = parseInt(formFechaNacimiento.split('-')[0], 10);
+      if (year < 1950 || year > 2020) {
+        alert('La fecha de nacimiento debe estar entre los años 1950 y 2020.');
+        return;
+      }
+    }
     const payload = {
       id: editingId || null,
       nombre_usuario: formNombreUsuario,

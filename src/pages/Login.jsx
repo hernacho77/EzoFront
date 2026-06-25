@@ -78,6 +78,13 @@ const Login = () => {
       setError('El usuario debe tener entre 3 y 20 caracteres.');
       return;
     }
+    if (regFechaNacimiento) {
+      const year = parseInt(regFechaNacimiento.split('-')[0], 10);
+      if (year < 1950 || year > 2020) {
+        setError('La fecha de nacimiento debe estar entre los años 1950 y 2020.');
+        return;
+      }
+    }
     setIsLoading(true);
     setError('');
     setRegSuccess('');
